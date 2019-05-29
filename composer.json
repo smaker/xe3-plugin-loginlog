@@ -1,0 +1,37 @@
+{
+  "name": "xpressengine-plugin/loginlog",
+  "description": "로그인 시 접속한 IP와 시간, 접속 환경을 기록하는 플러그인 입니다.",
+  "keywords": [
+    "xpressengine",
+    "plugin"
+  ],
+  "license": "LGPL-2.1",
+  "version": "0.0.1",
+  "type": "xpressengine-plugin",
+  "support": {
+    "email": "dowon2308@gmail.com"
+  },
+  "authors": [
+    {
+      "name": "SimpleSoft",
+      "email": "dowon2308@gmail.com",
+      "homepage": "https://simplesoft.io",
+      "role": "Developer"
+    }
+  ],
+  "extra": {
+    "xpressengine": {
+      "title": "로그인 기록",
+      "component": {}
+    }
+  },
+  "require": {
+    "whichbrowser/parser": "^2.0",
+    "phpoffice/phpspreadsheet": "^1.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "SimpleSoft\\XePlugin\\Loginlog\\": "src/"
+    }
+  }
+}
