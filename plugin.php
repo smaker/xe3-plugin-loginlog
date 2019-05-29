@@ -23,33 +23,6 @@ class Plugin extends AbstractPlugin
 		$this->intercept();
     }
 
-	private function registerSettingsMenu()
-	{
-        $menus = [
-            'contents.comment' => [
-                'title' => 'comment::comment',
-                'display' => true,
-                'description' => '',
-                'ordering' => 3000
-            ],
-            'contents.comment.content' => [
-                'title' => 'comment::commentMange',
-                'display' => true,
-                'description' => '',
-                'ordering' => 3010
-            ],
-            'contents.comment.trash' => [
-                'title' => 'comment::trashManage',
-                'display' => true,
-                'description' => '',
-                'ordering' => 3020
-            ],
-        ];
-        foreach ($menus as $id => $menu) {
-            XeRegister::push('settings/menu', $id, $menu);
-        }
-	}
-
 	/**
 	 * route 등록
 	 */
