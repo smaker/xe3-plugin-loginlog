@@ -19,6 +19,11 @@ class Plugin extends AbstractPlugin
      */
     public function boot()
     {
+		if (XeConfig::get('loginlog') == null)
+		{
+            XeConfig::add('loginlog', []);
+		}
+		
 		$this->route();
 		$this->intercept();
     }
