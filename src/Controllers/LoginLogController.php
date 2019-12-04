@@ -1,8 +1,6 @@
 <?php
 namespace SimpleSoft\XePlugin\Loginlog\Controllers;
 
-require __DIR__ . '/../../vendor/autoload.php';
-
 use XeFrontend;
 use XePresenter;
 use XeDB;
