@@ -106,13 +106,20 @@
 					</td>
 					<td>
 						<span>
-								<img data-toggle="xe-page-toggle-menu"
-                                        data-url="{{ route('toggleMenuPage') }}"
-                                        data-data='{!! json_encode(['id'=>$item->user_id, 'type'=>'user']) !!}' src="{{ $item->user->getProfileImage() }}" width="30" height="30" alt="{{ xe_trans('xe::profileImage') }}" class="user-profile">
-							<a href="#"
+                            @if ($item->user !== null)
+                            <img data-toggle="xe-page-toggle-menu"
+                                 data-url="{{ route('toggleMenuPage') }}"
+                                 data-data='{!! json_encode(['id'=>$item->user_id, 'type'=>'user']) !!}' src="{{ $item->user->getProfileImage() }}" width="30" height="30" alt="{{ xe_trans('xe::profileImage') }}" class="user-profile">
+                            @endif
+
+                            @if ($item->user === null)
+                                {{ $item->display_name }}
+                            @else
+                            <a href="#"
 								data-toggle="xe-page-toggle-menu"
 								data-url="{{ route('toggleMenuPage') }}"
 								data-data='{!! json_encode(['id'=> $item->user_id, 'type'=>'user']) !!}' data-text="{{ $item->display_name }}">{{ $item->display_name }}</a>
+                            @endif
 						</span>
 					</td>
 					<td>

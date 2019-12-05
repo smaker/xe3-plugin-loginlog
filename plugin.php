@@ -89,7 +89,23 @@ class Plugin extends AbstractPlugin
 							 'ipaddress' => \Request::ip(),
 							 'is_succeed' => 'N',
 							 'platform' => $res->os->toString(),
-							 'browser' => $res->browser->toString()
+							 'browser' => $res->browser->toString(),
+							 'logined_at' => date('Y-m-d H:i:s')
+							]
+						);
+					}
+					else if($user === null)
+					{
+						// 로그인 실패
+						\XeDB::table('loginlog')->insert(
+							['user_id' => 0,
+							 'display_name' => $email,
+							 'email' => $email,
+							 'ipaddress' => \Request::ip(),
+							 'is_succeed' => 'N',
+							 'platform' => $res->os->toString(),
+							 'browser' => $res->browser->toString(),
+							 'logined_at' => date('Y-m-d H:i:s')
 							]
 						);
 					}
@@ -123,7 +139,8 @@ class Plugin extends AbstractPlugin
 							 'ipaddress' => \Request::ip(),
 							 'is_succeed' => 'Y',
 							 'platform' => $res->os->toString(),
-							 'browser' => $res->browser->toString()
+							 'browser' => $res->browser->toString(),
+							 'logined_at' => date('Y-m-d H:i:s')
 							]
 						);
 					}
@@ -138,7 +155,8 @@ class Plugin extends AbstractPlugin
 						 'ipaddress' => \Request::ip(),
 						 'is_succeed' => 'Y',
 						 'platform' => $res->os->toString(),
-						 'browser' => $res->browser->toString()
+						 'browser' => $res->browser->toString(),
+						 'logined_at' => date('Y-m-d H:i:s')
 						]
 					);
 				}
