@@ -148,10 +148,10 @@
 
 <script>
     $(function () {
-       console.log($("#startDatePicker").datepicker({
+       $("#startDatePicker").datepicker({
             dateFormat: "yy-mm-dd",
             maxDate: 0,
-        }));
+        });
 
         $("#endDatePicker").datepicker({
             dateFormat: "yy-mm-dd",
