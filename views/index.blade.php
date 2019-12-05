@@ -101,7 +101,7 @@
 						@if ($item->is_succeed == 'Y')
 						<label class="label label-green">{{ xe_trans('loginlog::success') }}</label>
 						@else
-						<label class="label label-green">{{ xe_trans('loginlog::failed') }}</label>
+						<label class="label label-danger">{{ xe_trans('loginlog::failed') }}</label>
 						@endif
 					</td>
 					<td>

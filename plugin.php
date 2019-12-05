@@ -68,7 +68,7 @@ class Plugin extends AbstractPlugin
             'loginlog_auth_:attempt',
             function ($func, array $credentials = [], $remember = false) {
 				$result = $func($credentials, $remember);
-				
+
 				$user = \Auth::user();
 
 				$res = new \WhichBrowser\Parser($_SERVER['HTTP_USER_AGENT']);
@@ -76,17 +76,23 @@ class Plugin extends AbstractPlugin
                 // 로그인 후
                 if ($result == false)
 				{
-                    // 로그인 실패
-					\XeDB::table('loginlog')->insert(
-						['user_id' => $user->id,
-						 'display_name' => $user->display_name,
-						 'email' => $user->email,
-						 'ipaddress' => \Request::ip(),
-						 'is_succeed' => 'N',
-						 'platform' => $res->os->toString(),
-						 'browser' => $res->browser->toString()
-						]
-					);
+					$email = request()->input('email');
+					$user = app('xe.users')->findByEmail($email);
+
+					if(!is_null($user) && $user->getId())
+					{
+						// 로그인 실패
+						\XeDB::table('loginlog')->insert(
+							['user_id' => $user->getId(),
+							 'display_name' => $user->getDisplayName(),
+							 'email' => $email,
+							 'ipaddress' => \Request::ip(),
+							 'is_succeed' => 'N',
+							 'platform' => $res->os->toString(),
+							 'browser' => $res->browser->toString()
+							]
+						);
+					}
                 }
 
                 return $result;
@@ -101,6 +107,8 @@ class Plugin extends AbstractPlugin
 
 				$func($user, $remember);
 
+				$user = \Auth::user();
+
 				// 최고 관리자인 경우
 				if($user->rating == 'super')
 				{
@@ -109,8 +117,8 @@ class Plugin extends AbstractPlugin
 					{
 						// 로그인 성공
 						\XeDB::table('loginlog')->insert(
-							['user_id' => $user->id,
-							 'display_name' => $user->display_name,
+							['user_id' => $user->getId(),
+							 'display_name' => $user->getDisplayName(),
 							 'email' => $user->email,
 							 'ipaddress' => \Request::ip(),
 							 'is_succeed' => 'Y',
@@ -124,8 +132,8 @@ class Plugin extends AbstractPlugin
 				{
 					// 로그인 성공
 					\XeDB::table('loginlog')->insert(
-						['user_id' => $user->id,
-						 'display_name' => $user->display_name,
+						['user_id' => $user->getId(),
+						 'display_name' => $user->getDisplayName(),
 						 'email' => $user->email,
 						 'ipaddress' => \Request::ip(),
 						 'is_succeed' => 'Y',
@@ -171,7 +179,7 @@ class Plugin extends AbstractPlugin
 			$table->engine = 'InnoDB';
 
 			$table->bigIncrements('log_id');
-			$table->string('user_id', 255);
+			$table->string('user_id', 32);
 			$table->string('display_name', 255);
 			$table->string('email', 255);
 			$table->ipAddress('ipaddress');
