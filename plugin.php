@@ -197,7 +197,7 @@ class Plugin extends AbstractPlugin
 			$table->engine = 'InnoDB';
 
 			$table->bigIncrements('log_id');
-			$table->string('user_id', 32);
+			$table->string('user_id', 36);
 			$table->string('display_name', 255);
 			$table->string('email', 255);
 			$table->ipAddress('ipaddress');
